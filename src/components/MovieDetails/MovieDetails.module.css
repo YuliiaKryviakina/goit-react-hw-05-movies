@@ -1,0 +1,21 @@
+.img {
+  width: 300px;
+}
+
+.container {
+  margin-left: 45px;
+  margin-top: 45px;
+  display: flex;
+  gap: 25px;
+}
+
+.ul {
+  display: flex;
+  gap: 25px;
+}
+
+.add_info {
+  margin-top: 25px;
+  padding: 35px;
+  border: 1px solid black;
+}
