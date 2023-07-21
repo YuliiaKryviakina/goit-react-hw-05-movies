@@ -1,8 +1,13 @@
-import { useEffect } from "react";
-import { useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
+import { useSearchParams, useNavigate, useParams } from 'react-router-dom';
+import { Loader } from 'components/Loader/Loader';
+import { fetchMovieByQuery } from 'api/themoviedb';
+
+import Searchbar from 'components/SearchBar/SearchBar';
+import MoviesList from 'components/MoviesList/MoviesList';
 
 const Movies = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { movieId } = useParams();
 
@@ -11,16 +16,16 @@ const Movies = () => {
   const navigate = useNavigate();
 
   const handleSearchSubmit = useCallback(
-    async (query) => {
+    async query => {
       try {
         setIsLoading(true);
         const results = await fetchMovieByQuery(query);
         setSearchQuery(results);
-        searchParams.set("query", query);
+        searchParams.set('query', query);
         navigate(`/movies?${searchParams.toString()}`);
         setIsLoading(false);
       } catch (error) {
-        console.log("error", error);
+        console.log('error', error);
         setSearchQuery([]);
       }
     },
@@ -34,7 +39,7 @@ const Movies = () => {
         const results = await fetchMovieByQuery(movieId);
         setSearchQuery(results);
       } catch (error) {
-        console.log("error", error);
+        console.log('error', error);
         setSearchQuery([]);
       }
     };
@@ -42,7 +47,7 @@ const Movies = () => {
   }, [movieId]);
 
   useEffect(() => {
-    const query = searchParams.get("query");
+    const query = searchParams.get('query');
     if (query) {
       handleSearchSubmit(query);
     }
@@ -54,7 +59,7 @@ const Movies = () => {
 
   return (
     <>
-      <Searcbar onSubmit={handleSearchSubmit} />
+      <Searchbar onSubmit={handleSearchSubmit} />
       <MoviesList list={searchQuery}></MoviesList>
     </>
   );

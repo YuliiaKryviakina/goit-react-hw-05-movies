@@ -1,6 +1,6 @@
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
-import css from "./MoviesList.module.css";
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import css from './MoviesList.module.css';
 
 const MoviesList = ({ list }) => {
   const location = useLocation();
@@ -14,8 +14,7 @@ const MoviesList = ({ list }) => {
               {title}
             </Link>
           </li>
-        ))}
-      ;
+        ))}    
     </ul>
   );
 };
